@@ -49,9 +49,8 @@ module.exports = {
       sourceMap: false,
     }),
     new ExtractTextPlugin({
-      filename: '[chunkhash].bundle.css', 
+      filename: '[chunkhash].bundle.css',
       allChunks: true,
-      sourceMap: false,
     }),
   ],
   module: {
