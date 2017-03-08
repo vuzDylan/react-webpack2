@@ -1,3 +1,5 @@
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const InlineChunkWebpackPlugin = require('html-webpack-inline-chunk-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
@@ -13,11 +15,16 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, 'dist', 'assets'),
-    filename: '[chunkhash].bundle.js',
+    filename: '[name].[chunkhash].js',
     publicPath: '/assets/',
   },
   resolve: {
     extensions: ['.js', '.jsx'],
+    modules: [
+      path.resolve('./app'),
+      path.resolve('./app/js'),
+      'node_modules',
+    ],
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -25,14 +32,16 @@ module.exports = {
         NODE_ENV: JSON.stringify('production'),
       },
     }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: Infinity,
-    }),
+    new webpack.optimize.CommonsChunkPlugin({ name: ['vendor', 'mainfest'], minChunks: Infinity }),
+    new webpack.optimize.CommonsChunkPlugin({ async: true, minChunks: 2 }),
+    new webpack.optimize.MinChunkSizePlugin({ minChunkSize: 8192 }),
     new HtmlWebpackPlugin({
       title: 'Webpack-React-Redux',
       filename: '../index.html',
       template: './app/index.ejs',
+    }),
+    new InlineChunkWebpackPlugin({
+      inlineChunks: ['manifest'],
     }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
@@ -49,9 +58,12 @@ module.exports = {
       sourceMap: false,
     }),
     new ExtractTextPlugin({
-      filename: '[chunkhash].bundle.css',
+      filename: '[name].[chunkhash].css',
       allChunks: true,
     }),
+    ...process.env.DEBUG ? [new BundleAnalyzerPlugin({
+      analyzerMode: 'server',
+    })] : [],
   ],
   module: {
     rules: [
