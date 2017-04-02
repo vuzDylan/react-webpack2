@@ -1,5 +1,6 @@
-const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
+const path = require('path');
 
 module.exports = {
   entry: {
@@ -20,6 +21,11 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx'],
+    modules: [
+      path.resolve('./app'),
+      path.resolve('./app/js'),
+      'node_modules',
+    ],
   },
   devtool: 'source-map',
   plugins: [
