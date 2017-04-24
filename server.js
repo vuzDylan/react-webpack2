@@ -6,7 +6,8 @@ const server = new WebpackDevServer(webpack(config), {
   contentBase: './app',
   publicPath: config.output.publicPath,
   hot: true,
-  historyApiFallback: true
+  historyApiFallback: true,
+  disableHostCheck: true
 })
 
 server.listen(process.env.PORT || 5000, 'localhost', function (err) {
