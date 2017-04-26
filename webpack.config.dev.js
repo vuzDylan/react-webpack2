@@ -5,9 +5,10 @@ const path = require('path');
 module.exports = {
   entry: {
     main: [
-      './app/js/app.jsx',
-      'webpack/hot/dev-server',
+      'react-hot-loader/patch',
       'webpack-dev-server/client?http://localhost:5000',
+      'webpack/hot/only-dev-server',
+      './app/js/app.jsx',
     ],
     vendor: [
       'react',
@@ -30,8 +31,8 @@ module.exports = {
   devtool: 'source-map',
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
     new webpack.NamedModulesPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development'),
     }),

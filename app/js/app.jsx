@@ -1,11 +1,22 @@
 import React from 'react';
-import { render } from 'react-dom';
+import ReactDom from 'react-dom';
+import { AppContainer } from 'react-hot-loader';
 
-window.onload = () => {
-  render(
-    <div>Hello World</div>,
+import Root from './';
+
+const render = (Component) => {
+  ReactDom.render(
+    <AppContainer>
+      <Component />
+    </AppContainer>,
     document.getElementById('react'),
   );
 };
 
-if (module.hot) module.hot.accept(); // when app gets more complicated fix this line
+window.onload = () => {
+  render(Root);
+};
+
+if (module.hot) {
+  module.hot.accept('./', () => { render(Root); });
+}
