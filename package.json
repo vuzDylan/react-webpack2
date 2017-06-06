@@ -4,8 +4,8 @@
   "description": "boilerplate for a webpack2 react project",
   "main": "server.js",
   "scripts": {
-    "start": "NODE_ENV=development BABEL_ENV=development node ./server.js",
-    "build": "NODE_ENV=production BABEL_ENV=production ./node_modules/.bin/webpack --config webpack.config.prod.js",
+    "start": "cross-env NODE_ENV=development BABEL_ENV=development node ./server.js",
+    "build": "cross-env NODE_ENV=production BABEL_ENV=production ./node_modules/.bin/webpack --config webpack.config.prod.js",
     "lint": "eslint --ext .js --ext .jsx app",
     "validate": "npm ls"
   },
@@ -31,6 +31,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+    "cross-env": "^5.0.0",
     "css-loader": "^0.26.4",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^14.1.0",
