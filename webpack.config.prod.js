@@ -1,5 +1,5 @@
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const InlineChunkWebpackPlugin = require('html-webpack-inline-chunk-plugin');
+const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
@@ -27,21 +27,25 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.NamedChunksPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production'),
       },
     }),
-    new webpack.optimize.CommonsChunkPlugin({ name: ['vendor', 'mainfest'], minChunks: Infinity }),
+    new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', minChunks: Infinity }),
     new webpack.optimize.CommonsChunkPlugin({ async: true, minChunks: 2 }),
     new webpack.optimize.MinChunkSizePlugin({ minChunkSize: 8192 }),
+    new ChunkManifestPlugin({
+      filename: 'manifest.json',
+      manifestVariable: 'webpackManifest',
+      inlineManifest: true,
+    }),
     new HtmlWebpackPlugin({
+      chunksSortMode: 'dependency',
       title: 'Webpack-React-Redux',
       filename: '../index.html',
       template: './app/index.ejs',
-    }),
-    new InlineChunkWebpackPlugin({
-      inlineChunks: ['manifest'],
     }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {

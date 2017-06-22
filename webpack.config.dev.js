@@ -37,7 +37,7 @@ module.exports = {
       'process.env.NODE_ENV': JSON.stringify('development'),
     }),
     new HtmlWebpackPlugin({
-      title: 'webpack2 boilerplate',
+      title: 'Webpack-React-Redux',
       template: './app/index.ejs',
     }),
   ],
