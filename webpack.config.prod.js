@@ -34,7 +34,7 @@ module.exports = {
       },
     }),
     new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', minChunks: Infinity }),
-    new webpack.optimize.CommonsChunkPlugin({ async: true, minChunks: 2 }),
+    new webpack.optimize.CommonsChunkPlugin({ name: 'main', async: true, minChunks: 2 }),
     new webpack.optimize.MinChunkSizePlugin({ minChunkSize: 8192 }),
     new ChunkManifestPlugin({
       filename: 'manifest.json',
