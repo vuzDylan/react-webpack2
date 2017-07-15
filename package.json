@@ -10,7 +10,6 @@
     "validate": "npm ls"
   },
   "pre-push": [
-    "validate",
     "lint"
   ],
   "author": "Dylan Vuz",
