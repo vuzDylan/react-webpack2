@@ -1,5 +1,4 @@
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
@@ -36,11 +35,7 @@ module.exports = {
     new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', minChunks: Infinity }),
     new webpack.optimize.CommonsChunkPlugin({ name: 'main', async: true, minChunks: 2 }),
     new webpack.optimize.MinChunkSizePlugin({ minChunkSize: 8192 }),
-    new ChunkManifestPlugin({
-      filename: 'manifest.json',
-      manifestVariable: 'webpackManifest',
-      inlineManifest: true,
-    }),
+    new webpack.optimize.CommonsChunkPlugin({ name: 'runtime' }),
     new HtmlWebpackPlugin({
       chunksSortMode: 'dependency',
       title: 'Webpack-React-Redux',

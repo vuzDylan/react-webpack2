@@ -1,15 +1,17 @@
 {
-  "name": "react-webpack2",
-  "version": "1.0.0",
-  "description": "boilerplate for a webpack2 react project",
+  "name": "react-webpack-3",
+  "version": "2.0.0",
+  "description": "boilerplate for a webpack3 react project",
   "main": "server.js",
   "scripts": {
     "start": "cross-env NODE_ENV=development BABEL_ENV=development node ./server.js",
     "build": "cross-env NODE_ENV=production BABEL_ENV=production ./node_modules/.bin/webpack --config webpack.config.prod.js",
+    "debug": "DEBUG=true npm run build -- --display-optimization-bailout",
     "lint": "eslint --ext .js --ext .jsx app",
     "validate": "npm ls"
   },
   "pre-push": [
+    "validate",
     "lint"
   ],
   "author": "Dylan Vuz",
@@ -29,7 +31,6 @@
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
-    "chunk-manifest-webpack-plugin": "^1.1.0",
     "cross-env": "^5.0.1",
     "css-loader": "^0.28.4",
     "eslint": "^3.19.0",
@@ -50,7 +51,7 @@
     "style-loader": "^0.18.2",
     "url-loader": "^0.5.9",
     "webpack": "^3.3.0",
-    "webpack-bundle-analyzer": "^2.8.3",
+    "webpack-bundle-analyzer": "^2.9.0",
     "webpack-dev-server": "^2.5.1"
   }
 }
