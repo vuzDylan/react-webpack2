@@ -40,19 +40,13 @@ module.exports = {
       title: 'Webpack-React-Redux',
       template: './app/index.ejs',
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      cache: true,
-      parallel: true,
-      sourceMap: true,
-      mangle: false,
-    }),
   ],
   module: {
     rules: [
       {
         test: /\.jsx?$/,
-        use: [{ loader: 'babel-loader', options: { cacheDirectory: true } }],
-        exclude: /node_modules(?!\/webpack-dev-server)/
+        use: [{ loader: 'babel-loader', options: { cacheDirectory: './webpack_cache/' } }],
+        exclude: /node_modules/,
       },
       {
         test: /\.md$/,

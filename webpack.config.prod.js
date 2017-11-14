@@ -58,7 +58,7 @@ module.exports = {
     rules: [
       {
         test: /\.jsx?$/,
-        use: [{ loader: 'babel-loader', options: { cacheDirectory: true } }],
+        use: [{ loader: 'babel-loader', options: { cacheDirectory: './webpack_cache/' } }],
         exclude: /node_modules/,
       },
       {
