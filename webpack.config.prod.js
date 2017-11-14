@@ -43,14 +43,8 @@ module.exports = {
       template: './app/index.ejs',
     }),
     new webpack.optimize.UglifyJsPlugin({
+      cache: true,
       parallel: true,
-      sourceMap: false,
-      compress: {
-        warnings: false,
-      },
-      output: {
-        comments: false,
-      },
     }),
     new ExtractTextPlugin({
       filename: '[name].[chunkhash].css',
