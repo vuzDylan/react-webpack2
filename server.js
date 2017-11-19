@@ -6,6 +6,7 @@ const server = new WebpackDevServer(webpack(config), {
   contentBase: './app',
   publicPath: config.output.publicPath,
   hot: true,
+  quiet: true,
   historyApiFallback: true,
   disableHostCheck: true
 })

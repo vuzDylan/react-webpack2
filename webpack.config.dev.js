@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const path = require('path');
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -40,6 +41,7 @@ module.exports = {
       title: 'Webpack-React-Redux',
       template: './app/index.ejs',
     }),
+    new FriendlyErrorsWebpackPlugin(),
   ],
   module: {
     rules: [
